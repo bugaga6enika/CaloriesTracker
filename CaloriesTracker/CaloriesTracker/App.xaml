@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="clr-namespace:Prism.Autofac;assembly=Prism.Autofac.Forms"
+                        xmlns:controls="clr-namespace:XForms.Utils.CustomControls;assembly=XForms.Utils"
+                        x:Class="CaloriesTracker.App">
+    <Application.Resources>
+
+        <!-- Application resource dictionary -->
+
+        <!-- Colors -->
+
+        <Color x:Key="BackgroundColorStep1">#737e8e</Color>
+        <Color x:Key="BackgroundColorStep2">#4d5766</Color>
+        <Color x:Key="BackgroundColorStep3">#404956</Color>
+        <Color x:Key="BackgroundColorStep4">#323b47</Color>
+        <Color x:Key="BackgroundColorStep5">#242c38</Color>
+        <Color x:Key="BackgroundColorStep6">#203033</Color>
+
+        <Color x:Key="ControlLabelColor">#ffffff</Color>
+        <Color x:Key="PrimaryBackgroundColor">#5a1370</Color>
+        <Color x:Key="PrimaryBorderColor">#bd09ef</Color>
+        <Color x:Key="SuccessBackgroundColor">#2fbc38</Color>
+        <Color x:Key="SuccessBorderColor">#00ff10</Color>
+        <Color x:Key="DangerBackgroundColor">#ff0000</Color>
+        <Color x:Key="DangerBorderColor">#d10a0a</Color>
+        <Color x:Key="EntryBorderColor">#ffffff</Color>
+        <Color x:Key="DangerMessageColor">#ff8282</Color>
+        
+        <!-- /Colors -->
+
+        <!-- Icons -->
+
+        <x:String x:Key="RegisterIcon">&#xe69d;</x:String>
+        <x:String x:Key="LoginIcon">&#xe624;</x:String>
+
+        <!-- /Icons -->
+
+        <!-- Fonts -->
+
+        <OnPlatform x:Key="RegularFontFamily" x:TypeArguments="x:String" iOS="Montserrat-Regular" Android="Montserrat-Regular.ttf#Montserrat-Regular" />
+        <OnPlatform x:Key="ThinFontFamily" x:TypeArguments="x:String" iOS="Montserrat-Thin" Android="Montserrat-Thin.ttf#Montserrat-Thin" />
+        <OnPlatform x:Key="FontIcon" x:TypeArguments="x:String" iOS="Pe-icon-7-stroke" Android="Pe-icon-7-stroke.ttf#Pe-icon-7-stroke" />
+
+        <!-- /Fonts -->
+
+        <!-- Styles -->
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{DynamicResource BackgroundColorStep6}" />
+        </Style>
+
+        <Style x:Key="EntryStyle" TargetType="Frame">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="BorderColor" Value="{DynamicResource EntryBorderColor}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+
+        <!-- Label styles -->
+
+        <Style x:Key="ErrorMessageStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource DangerMessageColor}" />
+        </Style>
+
+        <Style x:Key="TitleStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="36" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
+        </Style>
+
+        <Style x:Key="RegularFontStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}"/>
+        </Style>
+
+        <Style x:Key="ControlLabelStyle" TargetType="Label" BasedOn="{StaticResource RegularFontStyle}">
+            <Setter Property="TextColor" Value="{DynamicResource ControlLabelColor}" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="ControlIconStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontIcon}" />
+            <Setter Property="TextColor" Value="{DynamicResource ControlLabelColor}" />
+        </Style>
+
+        <!-- /Label Syles-->
+
+        <!-- Button Styles -->
+
+        <Style x:Key="CustomButtonStyle" TargetType="controls:ButtonContainer">
+            <Setter Property="BackgroundColor" Value="{DynamicResource ButtonBackgroundColor}" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="BorderRadius" Value="5" />
+            <Setter Property="BorderColor" Value="{DynamicResource ButtonBorderColor}" />
+        </Style>
+
+        <Style x:Key="CustomPrimaryButtonStyle" TargetType="controls:ButtonContainer" BasedOn="CustomButtonStyle">
+            <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryBackgroundColor}" />
+            <Setter Property="BorderColor" Value="{DynamicResource PrimaryBorderColor}" />
+        </Style>
+
+        <Style x:Key="CustomSuccessButtonStyle" TargetType="controls:ButtonContainer" BasedOn="CustomButtonStyle">
+            <Setter Property="BackgroundColor" Value="{DynamicResource SuccessBackgroundColor}" />
+            <Setter Property="BorderColor" Value="{DynamicResource SuccessBorderColor}" />
+        </Style>
+
+        <!-- /Button Styles -->
+
+        <!-- /Styles -->
+
+        <ControlTemplate x:Key="MainTemplate">
+
+            <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                <ContentPresenter AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                </ContentPresenter>
+
+                <StackLayout AbsoluteLayout.LayoutFlags="All" 
+                             AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                             IsVisible="{TemplateBinding BindingContext.IsBusy}"
+                             BackgroundColor="#cc000000"></StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="20"
+                             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,.9,.1"
+                             IsVisible="{TemplateBinding BindingContext.IsBusy}"
+                             BackgroundColor="White">
+                    <ActivityIndicator HorizontalOptions="Start" WidthRequest="30" HeightRequest="30" IsRunning="{TemplateBinding BindingContext.IsBusy}" />
+                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="Processing you request" />
+                </StackLayout>
+
+            </AbsoluteLayout>
+
+        </ControlTemplate>
+
+    </Application.Resources>
+</prism:PrismApplication>

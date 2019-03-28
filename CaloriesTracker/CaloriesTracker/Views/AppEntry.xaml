@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"            
+             xmlns:controls="clr-namespace:XForms.Utils.CustomControls;assembly=XForms.Utils"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="CaloriesTracker.Views.AppEntry"
+             ControlTemplate="{StaticResource MainTemplate}">   
+
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                 Padding="10">
+        <Label x:Name="WelcomeLabel" Text="Welcome to Calories Tracker" Style="{StaticResource TitleStyle}"
+               FontFamily="{StaticResource ThinFontFamily}"
+               HorizontalTextAlignment="Center"></Label>
+
+        <Label x:Name="DescriptionLabel" Text="This is certainly a unique application that will allow you to monitor for some reason the amount of calories consumed each day"
+               FontFamily="{StaticResource RegularFontFamily}"
+               FontSize="Medium"
+               TextColor="{DynamicResource ControlLabelColor}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+
+        <StackLayout x:Name="ActionsContainer" VerticalOptions="EndAndExpand">
+            <Label Text="If you are new to us plese"
+                   FontFamily="{StaticResource RegularFontFamily}" TextColor="{DynamicResource ControlLabelColor}"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="Center"/>
+
+            <controls:ButtonContainer AutomationId="RegistrationButton"
+                                      Style="{DynamicResource CustomPrimaryButtonStyle}"
+                                      Title="Register"
+                                      Icon="{StaticResource RegisterIcon}"
+                                      TitleStyle="{DynamicResource ControlLabelStyle}"
+                                      IconStyle="{DynamicResource ControlIconStyle}"
+                                      VerticalOptions="CenterAndExpand"
+                                      HorizontalOptions="FillAndExpand"                                       
+                                      Command="{Binding RegisterCommand}" />
+            <Label Text="Or you can" FontFamily="{StaticResource RegularFontFamily}" TextColor="{DynamicResource ControlLabelColor}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+            <controls:ButtonContainer AutomationId="LoginButton"
+                                      Style="{DynamicResource CustomSuccessButtonStyle}"
+                                      Title="Login"
+                                      Icon="{StaticResource LoginIcon}"
+                                      TitleStyle="{DynamicResource ControlLabelStyle}"
+                                      IconStyle="{DynamicResource ControlIconStyle}"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="CenterAndExpand"                                     
+                                      Command="{Binding LoginCommand}" />
+        </StackLayout>       
+        
+    </StackLayout>
+    
+</ContentPage>

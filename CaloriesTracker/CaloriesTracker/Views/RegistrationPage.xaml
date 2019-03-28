@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:XForms.Utils.CustomControls;assembly=XForms.Utils"
+             xmlns:converters="clr-namespace:XForms.Utils.Converters;assembly=XForms.Utils"
+             xmlns:validationsconverters="clr-namespace:XForms.Utils.Validation.Converters;assembly=XForms.Utils"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="CaloriesTracker.Views.RegistrationPage"
+             ControlTemplate="{StaticResource MainTemplate}"
+             AutomationId="RegistrationScreen">
+
+    <ContentPage.Resources>
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
+        <validationsconverters:ValidationErrorsConverter x:Key="validationErrorsConverter" />
+    </ContentPage.Resources>
+
+    <StackLayout Padding="10">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+            <Frame StyleClass="entry" Style="{StaticResource EntryStyle}" VerticalOptions="CenterAndExpand">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding Source={x:Reference emailErrors}, Path=IsVisible}"
+                                 Value="True">
+                        <Setter Property="BorderColor" Value="{DynamicResource DangerBorderColor}" />                        
+                    </DataTrigger>
+                </Frame.Triggers>
+                <controls:TransparentEntry VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" TextColor="White" PlaceholderColor="White" Placeholder="Email" Text="{Binding Email.Value}" IsEnabled="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}" />
+            </Frame>
+            <Label x:Name="emailErrors" Style="{DynamicResource ErrorMessageStyle}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Text="{Binding Email.Errors, Converter={StaticResource validationErrorsConverter}}" IsVisible="{Binding Email.IsValid, Converter={StaticResource inverseBoolConverter}}" />
+        </StackLayout>
+        <controls:ButtonContainer Style="{DynamicResource CustomPrimaryButtonStyle}"
+                                  Title="Register"
+                                  Icon="{StaticResource RegisterIcon}"
+                                  TitleStyle="{DynamicResource ControlLabelStyle}"
+                                  IconStyle="{DynamicResource ControlIconStyle}"
+                                  VerticalOptions="EndAndExpand"
+                                  HorizontalOptions="FillAndExpand"
+                                  Command="{Binding RegisterCommand}" />
+    </StackLayout>
+
+</ContentPage>

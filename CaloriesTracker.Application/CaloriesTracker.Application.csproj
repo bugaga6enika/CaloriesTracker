@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="FluentValidation" Version="8.2.0" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CaloriesTracker.Infrastructure.Mock\CaloriesTracker.Infrastructure.Mock.csproj" />
+    <ProjectReference Include="..\CaloriesTracker.Infrastructure\CaloriesTracker.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
