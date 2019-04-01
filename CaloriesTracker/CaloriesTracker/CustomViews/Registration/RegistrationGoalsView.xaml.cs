@@ -17,7 +17,7 @@ namespace CaloriesTracker.CustomViews.Registration
         {
             if (BindingContext.GetType().FullName != typeof(RegistrationGoalsViewModel).FullName)
             {
-                BindingContext = ServiceLocator.Current.Resolve<RegistrationGoalsViewModel>();
+                BindingContext = ServiceLocator.Current.Resolve<RegistrationGoalsViewModel>();                
             }
 
             base.OnBindingContextChanged();

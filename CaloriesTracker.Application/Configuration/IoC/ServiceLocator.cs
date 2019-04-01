@@ -48,12 +48,12 @@ namespace CaloriesTracker.Application.Configuration.IoC
 #endif
             builder.RegisterInstance(Configurator.NativeHttpClientService);
 
-            // Infastructure layer
-            builder.RegisterType<ExceptionInterceptor>();
+            // Infastructure layer           
+            builder.RegisterType<ExceptionAsyncInterceptor>().AsSelf();
             builder.RegisterAssemblyTypes(typeof(Infrastructure.Configuration.Configurator).GetTypeInfo().Assembly)
                 .AsImplementedInterfaces()
-                .EnableClassInterceptors()
-                .InterceptedBy(typeof(ExceptionInterceptor));
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionAsyncInterceptor));          
 
             // Domain layer
             builder.RegisterAssemblyTypes(typeof(AuthToken).GetTypeInfo().Assembly).AsImplementedInterfaces();

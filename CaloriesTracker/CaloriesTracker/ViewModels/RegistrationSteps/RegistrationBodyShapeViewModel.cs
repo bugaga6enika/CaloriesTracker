@@ -54,13 +54,8 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
             Height.Validations.Add(new IntValueShouldBeGreaterThenRule(0));
 
             Disposables.Add(
-                Observable.FromAsync(() => Mediator.Send(new GetCurrentGoalQuery()))
-                .Subscribe(currentGoal => Device.BeginInvokeOnMainThread(() => CurrentGoal = currentGoal))
-            );
-
-            Disposables.Add(
                 Observable.FromAsync(() => Mediator.Send(new GetCurrentBodyShapeQuery()))
-                .Subscribe(async currentBodyShape =>
+                .Subscribe(currentBodyShape =>
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -69,18 +64,25 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
                         Height.Value = currentBodyShape.Height;
                     });
 
-                    // Wait > 700 ms to complete the validation
-                    await Task.Delay(1000);
+                    Disposables.Add(Observable.FromAsync(() => Mediator.Send(new GetCurrentGoalQuery()))
+                        .Subscribe(currentGoal => Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            CurrentGoal = currentGoal;
+                            if (currentGoal == GoalType.SaveWeight)
+                            {
+                                TargetWeight.Value = 0;
+                            }
 
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        CurrentWeight.Errors = new List<string>();
-                        CurrentWeight.IsValid = true;
-                        TargetWeight.Errors = new List<string>();
-                        TargetWeight.IsValid = true;
-                        Height.Errors = new List<string>();
-                        Height.IsValid = true;
-                    });
+                            // Wait > 700 ms to complete the validation
+                            await Task.Delay(750);
+
+                            CurrentWeight.Errors = new List<string>();
+                            CurrentWeight.IsValid = true;
+                            TargetWeight.Errors = new List<string>();
+                            TargetWeight.IsValid = true;
+                            Height.Errors = new List<string>();
+                            Height.IsValid = true;
+                        })));
                 })
             );
 

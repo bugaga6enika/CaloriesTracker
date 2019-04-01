@@ -16,40 +16,21 @@ namespace CaloriesTracker.Infrastructure.InternalAuth
 
         public async Task<AuthToken> GetAuthToken(Credentials credentials, CancellationToken cancellationToken)
         {
-            try
+            var authTokenDto = await RestService.Get(credentials, cancellationToken);
+            var authToken = AuthToken.Create(authTokenDto.AccessToken, authTokenDto.RefreshToken, authTokenDto.ExpiresIn);
+
+            if (authToken.IsValid)
             {
-                var authTokenDto = await RestService.Get(credentials, cancellationToken);
-                var authToken = AuthToken.Create(authTokenDto.AccessToken, authTokenDto.RefreshToken, authTokenDto.ExpiresIn);
-
-                if (authToken.IsValid)
-                {
-                    Settings.CurrentToken = authTokenDto;
-                }
-
-                return authToken;
+                Settings.CurrentToken = authTokenDto;
             }
-            catch (System.Exception e)
-            {
-                ForwardException(e);
 
-                return AuthToken.Empty;
-            }
-        }       
+            return authToken;
+        }
 
         public async Task<OperationResult> Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken)
         {
-            //try
-            //{
-                var response = await RestService.Register(registrationRequest.Email, cancellationToken);
-
-                return response.Success ? OperationResult.SuccessOperation : OperationResult.FailedOperation(new System.Exception(response.Content));
-            //}
-            //catch (System.Exception e)
-            //{
-            //    ForwardException(e);
-
-            //    return OperationResult.FailedOperation(e);
-            //}
-        }       
+            var response = await RestService.Register(registrationRequest.Email, cancellationToken);
+            return response.Success ? OperationResult.SuccessOperation : OperationResult.FailedOperation(new System.Exception(response.Content));
+        }
     }
 }
