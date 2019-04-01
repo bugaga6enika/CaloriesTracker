@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CaloriesTracker.CustomViews.ErrorView">
+    <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="#edf2f9">
+            <Label Text="Error" TextColor="Black" FontSize="Large" VerticalOptions="StartAndExpand" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+            <ScrollView VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+
+                <Label x:Name="errorLabel" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+
+            </ScrollView>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand">
+                <Button x:Name="confirmButton" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                        Text="OK" TextColor="White" BackgroundColor="Green"
+                        Clicked="OnConfirmedClicked"/>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

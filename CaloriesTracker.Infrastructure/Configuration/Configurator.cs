@@ -8,6 +8,8 @@
             Settings.Version = appVersion;
             Settings.Platform = platform;
 
+            Akavache.Registrations.Start(appName);
+
             //Mapper.Initialize(cfg =>
             //{
             //    cfg.AddProfile<BookingProfiles>();

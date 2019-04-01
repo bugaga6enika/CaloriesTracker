@@ -33,6 +33,11 @@
 
         <x:String x:Key="RegisterIcon">&#xe69d;</x:String>
         <x:String x:Key="LoginIcon">&#xe624;</x:String>
+        <x:String x:Key="LeftArrowIcon">&#xe686;</x:String>
+        <x:String x:Key="RightArrowIcon">&#xe684;</x:String>
+        <x:String x:Key="CheckIcon">&#xe66c;</x:String>
+        <x:String x:Key="MaleIcon">&#xe6ba;</x:String>
+        <x:String x:Key="FemaleIcon">&#xe6b2;</x:String>        
 
         <!-- /Icons -->
 
@@ -113,7 +118,25 @@
             <Setter Property="BorderColor" Value="{DynamicResource SuccessBorderColor}" />
         </Style>
 
+        <Style x:Key="CyrcleButton" TargetType="Frame">
+            <Setter Property="BorderColor" Value="{DynamicResource ControlLabelColor}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="30" />
+            <Setter Property="HeightRequest" Value="60" />
+            <Setter Property="WidthRequest" Value="60" />
+        </Style>
+
         <!-- /Button Styles -->
+        
+        <!-- Entry style -->
+
+        <Style x:Key="DefaultEntryStyle" TargetType="controls:TransparentEntry">
+            <Setter Property="TextColor" Value="{DynamicResource ControlLabelColor}" />
+            <Setter Property="PlaceholderColor" Value="{DynamicResource ControlLabelColor}" />
+        </Style>
+        
+        <!-- /Entry style -->
 
         <!-- /Styles -->
 

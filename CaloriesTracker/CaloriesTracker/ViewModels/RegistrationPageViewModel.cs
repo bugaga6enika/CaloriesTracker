@@ -1,98 +1,77 @@
-﻿using CaloriesTracker.Application.InternalAuth;
-using CaloriesTracker.Domain.Abstractions.Core;
-using Prism.Commands;
+﻿using CaloriesTracker.Models;
+using CaloriesTracker.Models.Registration.Events;
+using CaloriesTracker.Views;
 using Prism.Navigation;
 using System;
-using System.Reactive.Linq;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
-using XForms.Utils.Core;
-using XForms.Utils.Validation;
-using XForms.Utils.Validation.Rules;
 
 namespace CaloriesTracker.ViewModels
 {
     public class RegistrationPageViewModel : ViewModelBase
     {
-        public ValidatableObject<string> Email { get; private set; }
+        public ObservableCollection<RegistrationStepModel> RegistrationSteps { get; private set; }
 
-        public DelegateCommand RegisterCommand { get; private set; }
+        private int _position;
+        public int Position { get => _position; set => SetProperty(ref _position, value); }
+
+        private GoPreviousRegistrationStepEvent _goPreviousRegistrationStepEvent { get; set; }
+        private GoNextRegistrationStepEvent _goNextRegistrationStepEvent { get; set; }
+        private RegistrationCompletedEvent _registrationCompletedEvent { get; set; }
 
         public RegistrationPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Email = new ValidatableObject<string>();
-            Email.Validations.Add(new StringIsNotNullOrEmptyRule());
-            Email.Validations.Add(new EmailShouldBeValidRule());
+            Position = 0;
+            RegistrationSteps = new ObservableCollection<RegistrationStepModel>
+            {
+                new RegistrationStepModel { TypeOfView = RegistrationStepModel.Type.Intro },
+                new RegistrationStepModel { TypeOfView = RegistrationStepModel.Type.Goals },
+                new RegistrationStepModel { TypeOfView = RegistrationStepModel.Type.Gender },
+                new RegistrationStepModel { TypeOfView = RegistrationStepModel.Type.BodyShape },
+                new RegistrationStepModel { TypeOfView = RegistrationStepModel.Type.DateOfBirth },
+                new RegistrationStepModel { TypeOfView = RegistrationStepModel.Type.Credentials }
+            };
 
-            RegisterCommand = new DelegateCommand(RegistrationCommandHandler, CanRegistrationCommandExecute)
-               .ObservesProperty(() => Email.Value)
-               .ObservesProperty(() => IsBusy);
+            _goPreviousRegistrationStepEvent = EventAggregator.GetEvent<GoPreviousRegistrationStepEvent>();
+            _goNextRegistrationStepEvent = EventAggregator.GetEvent<GoNextRegistrationStepEvent>();
+            _registrationCompletedEvent = EventAggregator.GetEvent<RegistrationCompletedEvent>();
+
+            _goPreviousRegistrationStepEvent.Subscribe(GoPreviousRegistrationStepEventHandler, Prism.Events.ThreadOption.UIThread, false);
+            _goNextRegistrationStepEvent.Subscribe(GoNextRegistrationStepEventHandler, Prism.Events.ThreadOption.UIThread, false);
+            _registrationCompletedEvent.Subscribe(RegistrationCompletedEventHandler, false);
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        private void RegistrationCompletedEventHandler()
         {
-            base.OnNavigatedTo(parameters);
-            RegisterCommand.RaiseCanExecuteChanged();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.NavigateAsync(new Uri($"/NavigationPage/{nameof(MainPage)}", UriKind.Absolute));
+            });
+        }
 
-            Disposables.Add(Email.ToObservable(x => x.Value).Throttle(TimeSpan.FromMilliseconds(700)).Subscribe(x => { Email.Validate(); RegisterCommand.RaiseCanExecuteChanged(); }));
+        private void GoNextRegistrationStepEventHandler()
+        {
+            if (Position < RegistrationSteps.Count)
+            {
+                Position++;
+            }
+        }
+
+        private void GoPreviousRegistrationStepEventHandler()
+        {
+            if (Position > 0)
+            {
+                Position--;
+            }
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
             base.OnNavigatedFrom(parameters);
-            Email.Value = "";
-        }
 
-        private bool CanRegistrationCommandExecute()
-        {
-            return !IsBusy && Email.IsValid && Email.Value?.Length > 0;
-        }
-
-        private void RegistrationCommandHandler()
-        {
-            try
-            {
-                OnRequestStarted();
-
-                var registrationObservable = Observable.FromAsync(() =>
-                {
-                    return Mediator.Send(new RegistrationCommand
-                    {
-                        Email = Email.Value
-                    });
-                })
-                .Retry(3);
-
-                Disposables.Add(registrationObservable.Subscribe(
-                        response => OnRegistrationResponse(response),
-                        (e) =>
-                        {
-                            OnFailure(e.Message, e);
-                            OnRequestEnded();
-                        },
-                        () =>
-                        {
-                            OnRequestEnded();
-                        }
-                    )
-                );
-            }
-            catch (Exception e)
-            {
-                OnFailure(e.Message, e);
-                OnRequestEnded();
-            }
-        }
-
-        private void OnRegistrationResponse(OperationResult operationResult)
-        {
-            if (operationResult.Status != OperationStatus.Success)
-            {
-                OnFailure("", new AggregateException(operationResult.Exception));
-            }
-            else
-            {
-                Device.BeginInvokeOnMainThread(async () => await PageDialogService.DisplayAlertAsync("Registration success", "First step of registration is complete. We've sent you an email with instruction to complete the registration", "OK"));
-            }
+            _goPreviousRegistrationStepEvent.Unsubscribe(GoPreviousRegistrationStepEventHandler);
+            _goNextRegistrationStepEvent.Unsubscribe(GoNextRegistrationStepEventHandler);
+            _registrationCompletedEvent.Unsubscribe(RegistrationCompletedEventHandler);
         }
     }
 }

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:converters="clr-namespace:XForms.Utils.Converters;assembly=XForms.Utils"
+             xmlns:domain="clr-namespace:CaloriesTracker.Domain.InternalAuth;assembly=CaloriesTracker.Domain"
+             x:Class="CaloriesTracker.CustomViews.Registration.RegistrationGenderView"
+             x:Name="genderView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:EnumToBoolConverter x:Key="enumToBoolConverter" />
+            <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Label VerticalOptions="Start" Margin="-10,0,0,0" HorizontalTextAlignment="Start" HorizontalOptions="Start" Text="{StaticResource LeftArrowIcon}" FontSize="46" FontAttributes="Bold" Style="{DynamicResource ControlIconStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnGoBackCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="Gender" Style="{DynamicResource TitleStyle}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+
+            <Frame VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                   BorderColor="{DynamicResource EntryBorderColor}"
+                   BackgroundColor="Transparent"
+                   HeightRequest="36" Margin="5">
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnGenderSelectCommand}" CommandParameter="{x:Static domain:Gender.Male}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Text="{StaticResource MaleIcon}" FontSize="36" HorizontalOptions="Start" VerticalOptions="Center" Style="{DynamicResource ControlIconStyle}"  />
+                    <Label Text="I'm male" TextColor="{DynamicResource ControlLabelColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{StaticResource CheckIcon}"
+                           Style="{DynamicResource ControlIconStyle}" 
+                           IsVisible="{Binding Gender.Value, Converter={StaticResource enumToBoolConverter}, ConverterParameter={x:Static domain:Gender.Male}}"
+                           FontSize="36"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+
+            <Frame VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                   BorderColor="{DynamicResource EntryBorderColor}"
+                   BackgroundColor="Transparent"
+                   HeightRequest="36" Margin="5">
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnGenderSelectCommand}" CommandParameter="{x:Static domain:Gender.Female}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Text="{StaticResource FemaleIcon}" FontSize="36" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Style="{DynamicResource ControlIconStyle}"  />
+                    <Label Text="I'm female" TextColor="{DynamicResource ControlLabelColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{StaticResource CheckIcon}"
+                           Style="{DynamicResource ControlIconStyle}" 
+                           IsVisible="{Binding Gender.Value, Converter={StaticResource enumToBoolConverter}, ConverterParameter={x:Static domain:Gender.Female}}"
+                           FontSize="36"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource CyrcleButton}"
+                   VerticalOptions="EndAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,0,0,40">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="0"
+                             IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnGoNextCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Text="{StaticResource RightArrowIcon}" FontSize="46" Style="{DynamicResource ControlIconStyle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

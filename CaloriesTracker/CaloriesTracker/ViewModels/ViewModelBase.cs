@@ -1,6 +1,7 @@
 ﻿using CaloriesTracker.Configuration;
 using CaloriesTracker.Domain.Abstractions.Rest.Exceptions;
 using MediatR;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -18,6 +19,7 @@ namespace CaloriesTracker.ViewModels
         protected CompositeDisposable Disposables;
         protected IMediator Mediator { get; }
         protected IPageDialogService PageDialogService { get; }
+        protected IEventAggregator EventAggregator { get; private set; }
 
         private string _title;
         public string Title
@@ -36,8 +38,9 @@ namespace CaloriesTracker.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
-            Mediator = CaloriesTracker.Application.Configuration.IoC.ServiceLocator.Current.Resolve<IMediator>();
-            PageDialogService = Configuration.ServiceLocator.Current.Resolve<IPageDialogService>();
+            Mediator = Application.Configuration.IoC.ServiceLocator.Current.Resolve<IMediator>();
+            PageDialogService = ServiceLocator.Current.Resolve<IPageDialogService>();
+            EventAggregator = ServiceLocator.Current.Resolve<IEventAggregator>();
             Disposables = new CompositeDisposable();
         }
 

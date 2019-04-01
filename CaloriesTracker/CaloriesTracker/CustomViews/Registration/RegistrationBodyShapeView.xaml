@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                                         
+             xmlns:controls="clr-namespace:XForms.Utils.CustomControls;assembly=XForms.Utils"
+             xmlns:converters="clr-namespace:XForms.Utils.Converters;assembly=XForms.Utils"
+             xmlns:validationsconverters="clr-namespace:XForms.Utils.Validation.Converters;assembly=XForms.Utils"
+             x:Class="CaloriesTracker.CustomViews.Registration.RegistrationBodyShapeView"
+             x:Name="bodyShapeView">
+    
+    <ContentView.Resources>
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
+        <converters:NullableIntConverter x:Key="nullableIntConverter" />
+        <converters:NullableDoubleConverter x:Key="nullableDoubleConverter" />
+        <validationsconverters:ValidationErrorsConverter x:Key="validationErrorsConverter" />
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Label VerticalOptions="Start" Margin="-10,0,0,0" HorizontalTextAlignment="Start" HorizontalOptions="Start" Text="{StaticResource LeftArrowIcon}" FontSize="46" FontAttributes="Bold" Style="{DynamicResource ControlIconStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnGoBackCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="Body shape" Style="{DynamicResource TitleStyle}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
+
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Padding="5">
+                <Frame StyleClass="entry" Style="{StaticResource EntryStyle}" VerticalOptions="Center">
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame"
+                                     Binding="{Binding Source={x:Reference currentWeigthErrors}, Path=IsVisible}"
+                                     Value="True">
+                            <Setter Property="BorderColor" Value="{DynamicResource DangerBorderColor}" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <StackLayout Orientation="Horizontal" Padding="0,0,5,0">
+                        <controls:TransparentEntry Keyboard="Numeric" 
+                                                   VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"                                                   
+                                                   TextColor="{DynamicResource ControlLabelColor}"
+                                                   PlaceholderColor="{DynamicResource ControlLabelColor}"
+                                                   Placeholder="Current weight"
+                                                   Text="{Binding CurrentWeight.Value, Converter={StaticResource nullableDoubleConverter}}" />
+                        <Label Text="kg" TextColor="{DynamicResource ControlLabelColor}" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="currentWeigthErrors"                       
+                       Style="{DynamicResource ErrorMessageStyle}" 
+                       VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                       Text="{Binding CurrentWeight.Errors, Converter={StaticResource validationErrorsConverter}}" 
+                       IsVisible="{Binding CurrentWeight.IsValid, Converter={StaticResource inverseBoolConverter}}" />
+
+                <Frame StyleClass="entry" Style="{StaticResource EntryStyle}" VerticalOptions="Center" IsVisible="{Binding IsTargetWeightVisible}">
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame"
+                                     Binding="{Binding Source={x:Reference targetWeightErrors}, Path=IsVisible}"
+                                     Value="True">
+                            <Setter Property="BorderColor" Value="{DynamicResource DangerBorderColor}" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <StackLayout Orientation="Horizontal" Padding="0,0,5,0">
+                        <controls:TransparentEntry Keyboard="Numeric" 
+                                                   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"                                                   
+                                                   TextColor="{DynamicResource ControlLabelColor}"
+                                                   PlaceholderColor="{DynamicResource ControlLabelColor}"
+                                                   Placeholder="Target weight"
+                                                   Text="{Binding TargetWeight.Value, Converter={StaticResource nullableDoubleConverter}}" />
+                        <Label Text="kg" TextColor="{DynamicResource ControlLabelColor}" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="targetWeightErrors"                      
+                       Style="{DynamicResource ErrorMessageStyle}" 
+                       VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                       Text="{Binding TargetWeight.Errors, Converter={StaticResource validationErrorsConverter}}" 
+                       IsVisible="{Binding TargetWeight.IsValid, Converter={StaticResource inverseBoolConverter}}" />
+
+                <Frame StyleClass="entry" Style="{StaticResource EntryStyle}" VerticalOptions="Center">
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame"
+                                 Binding="{Binding Source={x:Reference heightErrors}, Path=IsVisible}"
+                                 Value="True">
+                            <Setter Property="BorderColor" Value="{DynamicResource DangerBorderColor}" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <StackLayout Orientation="Horizontal" Padding="0,0,5,0">
+                        <controls:TransparentEntry Keyboard="Numeric" 
+                                                   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"                                                   
+                                                   TextColor="{DynamicResource ControlLabelColor}"
+                                                   PlaceholderColor="{DynamicResource ControlLabelColor}"
+                                                   Placeholder="Current height"
+                                                   Text="{Binding Height.Value, Converter={StaticResource nullableIntConverter}}" />
+                        <Label Text="cm" TextColor="{DynamicResource ControlLabelColor}" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="heightErrors"                   
+                   Style="{DynamicResource ErrorMessageStyle}" 
+                   VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                   Text="{Binding Height.Errors, Converter={StaticResource validationErrorsConverter}}" 
+                   IsVisible="{Binding Height.IsValid, Converter={StaticResource inverseBoolConverter}}" />
+            </StackLayout>
+            <Frame Style="{StaticResource CyrcleButton}"
+                   VerticalOptions="EndAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,0,0,40">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="0"
+                             IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnGoNextCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Text="{StaticResource RightArrowIcon}" FontSize="46" Style="{DynamicResource ControlIconStyle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

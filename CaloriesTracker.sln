@@ -15,15 +15,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaloriesTracker.Domain.Abst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XForms.Utils", "XForms.Utils\XForms.Utils.csproj", "{8C7464EA-7E7F-4E2F-B86F-666598D39C02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloriesTracker.Domain", "CaloriesTracker.Domain\CaloriesTracker.Domain.csproj", "{036D6A1B-AFBC-411D-B586-2EE979A3BB0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaloriesTracker.Domain", "CaloriesTracker.Domain\CaloriesTracker.Domain.csproj", "{036D6A1B-AFBC-411D-B586-2EE979A3BB0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloriesTracker.Infrastructure", "CaloriesTracker.Infrastructure\CaloriesTracker.Infrastructure.csproj", "{85B1A9E5-B5B9-44CD-AF91-CE4F6FB76250}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaloriesTracker.Infrastructure", "CaloriesTracker.Infrastructure\CaloriesTracker.Infrastructure.csproj", "{85B1A9E5-B5B9-44CD-AF91-CE4F6FB76250}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1662B761-5A68-49C5-B670-11A42F67FEBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloriesTracker.Application", "CaloriesTracker.Application\CaloriesTracker.Application.csproj", "{B367577F-ABE2-4EAD-8002-1397C40C6700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaloriesTracker.Application", "CaloriesTracker.Application\CaloriesTracker.Application.csproj", "{B367577F-ABE2-4EAD-8002-1397C40C6700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloriesTracker.Infrastructure.Mock", "CaloriesTracker.Infrastructure.Mock\CaloriesTracker.Infrastructure.Mock.csproj", "{4D353F83-3F3E-4768-9F2C-521B3C56A286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaloriesTracker.Infrastructure.Mock", "CaloriesTracker.Infrastructure.Mock\CaloriesTracker.Infrastructure.Mock.csproj", "{4D353F83-3F3E-4768-9F2C-521B3C56A286}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{470F2C60-809B-40B5-AF85-9F889D0C8DDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloriesTracker.UnitTests", "CaloriesTracker.UnitTests\CaloriesTracker.UnitTests.csproj", "{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -265,6 +269,30 @@ Global
 		{4D353F83-3F3E-4768-9F2C-521B3C56A286}.Release|iPhone.Build.0 = Release|Any CPU
 		{4D353F83-3F3E-4768-9F2C-521B3C56A286}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{4D353F83-3F3E-4768-9F2C-521B3C56A286}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Release|iPhone.Build.0 = Release|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -274,6 +302,7 @@ Global
 		{036D6A1B-AFBC-411D-B586-2EE979A3BB0B} = {AE0A6282-FBC9-42E7-84B5-B3DBA4EBDBF1}
 		{85B1A9E5-B5B9-44CD-AF91-CE4F6FB76250} = {1662B761-5A68-49C5-B670-11A42F67FEBB}
 		{4D353F83-3F3E-4768-9F2C-521B3C56A286} = {1662B761-5A68-49C5-B670-11A42F67FEBB}
+		{1C8EBB6F-694F-46C3-9F6F-706F62C98D67} = {470F2C60-809B-40B5-AF85-9F889D0C8DDA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0159C4E-CFB6-45F7-8125-83BAFC160603}

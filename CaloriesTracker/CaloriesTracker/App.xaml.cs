@@ -1,4 +1,6 @@
-﻿using CaloriesTracker.ViewModels;
+﻿using CaloriesTracker.CustomViews.Registration;
+using CaloriesTracker.ViewModels;
+using CaloriesTracker.ViewModels.RegistrationSteps;
 using CaloriesTracker.Views;
 using MediatR;
 using Prism;
@@ -38,6 +40,13 @@ namespace CaloriesTracker
             containerRegistry.RegisterForNavigation<AppEntry, AppEntryViewModel>();
             containerRegistry.RegisterForNavigation<RegistrationPage, RegistrationPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+
+            containerRegistry.Register<RegistrationIntroViewModel>();
+            containerRegistry.Register<RegistrationGoalsViewModel>();
+            containerRegistry.Register<RegistrationGenderViewModel>();
+            containerRegistry.Register<RegistrationBodyShapeViewModel>();
+            containerRegistry.Register<RegistrationDateOfBirthViewModel>();
+            containerRegistry.Register<RegistrationCredentialsViewModel>();
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"         
+             xmlns:converters="clr-namespace:XForms.Utils.Converters;assembly=XForms.Utils"
+             x:Class="CaloriesTracker.CustomViews.Registration.RegistrationIntroView">
+
+    <ContentView.Resources>
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Label x:Name="WelcomeLabel" Text="Welcome to Calories Tracker" Opacity="0" Style="{StaticResource TitleStyle}"
+                   FontFamily="{StaticResource ThinFontFamily}"
+                   HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="DescriptionLabel" Opacity="0" Text="This is certainly a unique application that will allow you to monitor for some reason the amount of calories consumed each day"
+                   FontFamily="{StaticResource RegularFontFamily}"
+                   FontSize="Medium"
+                   TextColor="{DynamicResource ControlLabelColor}"
+                   HorizontalTextAlignment="Center" VerticalOptions="Center" />
+            <Frame Style="{StaticResource CyrcleButton}"
+                   VerticalOptions="EndAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,0,0,40">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="0"
+                             IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnGoNextCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Text="{StaticResource RightArrowIcon}" FontSize="46" Style="{DynamicResource ControlIconStyle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

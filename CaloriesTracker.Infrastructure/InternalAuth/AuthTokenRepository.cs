@@ -50,6 +50,6 @@ namespace CaloriesTracker.Infrastructure.InternalAuth
 
                 return OperationResult.FailedOperation(e);
             }
-        }
+        }       
     }
 }

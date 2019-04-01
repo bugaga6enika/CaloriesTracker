@@ -63,5 +63,11 @@ namespace XForms.Utils.Validation
 
             return this.IsValid;
         }
+
+        public void SetAndValidate(T value)
+        {
+            Value = value;
+            Validate();
+        }
     }
 }

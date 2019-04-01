@@ -4,7 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth
+namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.Credentials
 {
     public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, OperationResult>
     {

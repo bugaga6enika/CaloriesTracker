@@ -9,6 +9,7 @@ namespace CaloriesTracker.Views
         public RegistrationPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             ContentPageGloss.SetBackgroundGradient(this, PageSettings.DefaultBackground);
         }
     }

@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using CaloriesTracker.Droid.Services;
 using CaloriesTracker.Infrastructure.Rest;
+using CarouselView.FormsPlugin.Android;
 using Prism;
 using Prism.Ioc;
 using System.Net.Http;
@@ -19,7 +20,10 @@ namespace CaloriesTracker.Droid
 
             base.OnCreate(bundle);
 
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            CarouselViewRenderer.Init();
+
             LoadApplication(new App(new AndroidInitializer()));
 
             XFGloss.Droid.Library.Init(this, bundle);

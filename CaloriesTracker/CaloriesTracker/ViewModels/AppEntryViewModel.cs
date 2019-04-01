@@ -1,10 +1,12 @@
 ﻿using CaloriesTracker.Application.InternalAuth;
 using CaloriesTracker.Commands;
 using CaloriesTracker.Domain.InternalAuth;
+using CaloriesTracker.Models;
 using CaloriesTracker.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
+using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using Xamarin.Forms;
 
@@ -14,11 +16,18 @@ namespace CaloriesTracker.ViewModels
     {
         public DelegateCommand RegisterCommand { get; private set; }
         public DelegateCommand LoginCommand { get; private set; }
+        public DelegateCommand ShowSearchPanelCommand { get; private set; }
 
         public AppEntryViewModel(INavigationService navigationService) : base(navigationService)
         {
             RegisterCommand = new CustomDelegateCommand(RegisterCommandHandler, RegisterCanExecute);
             LoginCommand = new CustomDelegateCommand(LoginCommandHandler, LoginCanExecute);
+            ShowSearchPanelCommand = new DelegateCommand(ShowSearchPanelCommandHandler);            
+        }
+
+        private void ShowSearchPanelCommandHandler()
+        {
+
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -39,8 +48,6 @@ namespace CaloriesTracker.ViewModels
 
         private void CheckCurrentAuthToken()
         {
-            OnRequestStarted();
-
             var observable = Observable.FromAsync(() => Mediator.Send<AuthToken>(new GetCurrentAuthTokenQuery()))
                 .Retry(3)
                 .Catch((Exception e) => Observable.Return(AuthToken.Empty));
@@ -56,7 +63,7 @@ namespace CaloriesTracker.ViewModels
             if (authToken.IsValid)
             {
                 Device.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync(nameof(MainPage)));
-            }
+            }            
         }
 
         private void LoginCommandHandler()

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using XForms.Utils.CustomControls;
 
-[assembly: ExportRenderer(typeof(TransparentEntry), typeof(TransparentEntryRenderer))]
+[assembly: ExportRenderer(typeof(TransparentDatePicker), typeof(TransparentDatePickerRenderer))]
 namespace CaloriesTracker.Droid.CustomRenderers
 {
     public class TransparentEntryRenderer : EntryRenderer

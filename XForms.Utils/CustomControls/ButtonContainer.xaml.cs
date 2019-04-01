@@ -11,7 +11,7 @@ namespace XForms.Utils.CustomControls
         #region Button container
 
         public static readonly new BindableProperty BackgroundColorProperty =
-            BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(ButtonContainer), Color.Transparent);
+            BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(ButtonContainer), Color.White);
 
         public new Color BackgroundColor
         {

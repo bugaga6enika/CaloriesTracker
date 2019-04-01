@@ -8,10 +8,19 @@ namespace CaloriesTracker.Views
     {
         public AppEntry()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
+
             NavigationPage.SetHasNavigationBar(this, false);
 
-            ContentPageGloss.SetBackgroundGradient(this, PageSettings.DefaultBackground);
+            ContentPageGloss.SetBackgroundGradient(this, PageSettings.DefaultBackground);           
 
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -24,7 +33,7 @@ namespace CaloriesTracker.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();            
+            base.OnAppearing();
 
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -40,12 +49,12 @@ namespace CaloriesTracker.Views
             base.OnDisappearing();
 
             Device.BeginInvokeOnMainThread(async () =>
-            {                
+            {
                 WelcomeLabel.FadeTo(0, 100);
                 await DescriptionLabel.FadeTo(0, 100);
                 WelcomeLabel.TranslateTo(0, 50, 0);
                 DescriptionLabel.TranslateTo(0, 50, 0);
             });
-        }
+        }        
     }
 }

@@ -45,7 +45,7 @@ namespace CaloriesTracker.Domain.InternalAuth
             (
                 new IValidationRule<DateTimeOffset>[]
                 {
-                    new DateTimeOffsetMustBeAfterNowRule()
+                    new DateTimeOffsetMustBeBeforeNowRule()
                 }
             );
         }
