@@ -38,18 +38,18 @@ namespace CaloriesTracker.Infrastructure.InternalAuth
 
         public async Task<OperationResult> Register(RegistrationRequest registrationRequest, CancellationToken cancellationToken)
         {
-            try
-            {
+            //try
+            //{
                 var response = await RestService.Register(registrationRequest.Email, cancellationToken);
 
                 return response.Success ? OperationResult.SuccessOperation : OperationResult.FailedOperation(new System.Exception(response.Content));
-            }
-            catch (System.Exception e)
-            {
-                ForwardException(e);
+            //}
+            //catch (System.Exception e)
+            //{
+            //    ForwardException(e);
 
-                return OperationResult.FailedOperation(e);
-            }
+            //    return OperationResult.FailedOperation(e);
+            //}
         }       
     }
 }

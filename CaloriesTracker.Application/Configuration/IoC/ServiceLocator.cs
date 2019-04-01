@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using CaloriesTracker.Application.Pipelines;
 using CaloriesTracker.Domain.InternalAuth;
+using CaloriesTracker.Infrastructure.Interceptors;
+using Castle.DynamicProxy;
 using MediatR;
 using System;
 using System.Reflection;
@@ -45,7 +48,11 @@ namespace CaloriesTracker.Application.Configuration.IoC
             builder.RegisterInstance(Configurator.NativeHttpClientService);
 
             // Infastructure layer
-            builder.RegisterAssemblyTypes(typeof(Infrastructure.Configuration.Configurator).GetTypeInfo().Assembly).AsImplementedInterfaces();
+            builder.RegisterType<ExceptionInterceptor>();
+            builder.RegisterAssemblyTypes(typeof(Infrastructure.Configuration.Configurator).GetTypeInfo().Assembly)
+                .AsImplementedInterfaces()
+                .EnableClassInterceptors()
+                .InterceptedBy(typeof(ExceptionInterceptor));
 
             // Domain layer
             builder.RegisterAssemblyTypes(typeof(AuthToken).GetTypeInfo().Assembly).AsImplementedInterfaces();

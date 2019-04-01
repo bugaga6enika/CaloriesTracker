@@ -1,4 +1,7 @@
-﻿namespace CaloriesTracker.Infrastructure.Configuration
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+namespace CaloriesTracker.Infrastructure.Configuration
 {
     public static class Configurator
     {
