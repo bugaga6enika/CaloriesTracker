@@ -40,7 +40,7 @@ namespace CaloriesTracker.Infrastructure.Mock.Rest
             #region Auth token
 
             mockHttp//.When($"{Settings.LocalhostUrl}/account/pin-code/token?Username=dcslAdmin&Password=%212345Qwert&DeviceId=unknown")
-               .When($"{ApiEndpoint}/account/token?Username=vtomazov@gmail.com&Password=reteywywuwuw")
+               .When($"{ApiEndpoint}/account/token?Username=vtomazov@gmail.com&Password=5432!Qwert")
                .Respond("application/json", JsonConvert.SerializeObject(new AuthTokenDto
                {
                    AccessToken = "Test-Access-Token",

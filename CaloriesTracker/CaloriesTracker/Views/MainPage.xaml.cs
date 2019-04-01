@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CaloriesTracker.Configuration;
 using Xamarin.Forms;
+using XFGloss;
 
 namespace CaloriesTracker.Views
 {
@@ -12,6 +9,8 @@ namespace CaloriesTracker.Views
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            ContentPageGloss.SetBackgroundGradient(this, PageSettings.DefaultBackground);
         }
     }
 }

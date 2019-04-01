@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CaloriesTracker.CustomViews.ErrorView">
     <ContentView.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="20" BackgroundColor="#edf2f9">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10,20,10,10" BackgroundColor="#edf2f9">
             <Label Text="Error" TextColor="Black" FontSize="Large" VerticalOptions="StartAndExpand" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
             <ScrollView VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
 

@@ -1,5 +1,6 @@
 ﻿using CaloriesTracker.Configuration;
 using CaloriesTracker.Domain.Abstractions.Rest.Exceptions;
+using CaloriesTracker.Views;
 using MediatR;
 using Prism.Events;
 using Prism.Mvvm;
@@ -96,8 +97,14 @@ namespace CaloriesTracker.ViewModels
             });
         }
 
-        protected virtual Task ShowErrorAsync(string title, string content, TimeSpan duration)
-            => PageDialogService.DisplayAlertAsync(title, content, "OK");
+        protected virtual async Task ShowErrorAsync(string title, string content, TimeSpan duration)
+        {
+            using (var errorPopUp = new ErrorPopUp(content))
+            {
+                await errorPopUp.GetResultAsync();
+            }
+        }
+        //=> PageDialogService.DisplayAlertAsync(title, content, "OK");
 
         protected virtual void OnFailure(string message, Exception e)
         {
