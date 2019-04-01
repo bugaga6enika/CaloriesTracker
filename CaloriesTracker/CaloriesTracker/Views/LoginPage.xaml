@@ -15,20 +15,26 @@
         <validationsconverters:ValidationErrorsConverter x:Key="validationErrorsConverter" />
     </ContentPage.Resources>
 
-    <StackLayout>
-        <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10">
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
             <Frame StyleClass="entry" Style="{StaticResource EntryStyle}">
                 <Frame.Triggers>
                     <DataTrigger TargetType="Frame"
-                                 Binding="{Binding Source={x:Reference usernameErrors}, Path=IsVisible}"
+                                 Binding="{Binding Source={x:Reference emailErrors}, Path=IsVisible}"
                                  Value="True">
                         <Setter Property="BorderColor" Value="{DynamicResource DangerBorderColor}" />
                     </DataTrigger>
                 </Frame.Triggers>
-                <controls:TransparentEntry VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" TextColor="White" PlaceholderColor="White" Placeholder="Username" Text="{Binding Username.Value}" IsEnabled="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}" />
+                <controls:TransparentEntry VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                                           Style="{StaticResource DefaultEntryStyle}"
+                                           Placeholder="Email"
+                                           Text="{Binding Email.Value}" 
+                                           IsEnabled="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}" />
             </Frame>
-            <Label x:Name="usernameErrors" Style="{DynamicResource ErrorMessageStyle}" HorizontalOptions="FillAndExpand" Text="{Binding Username.Errors, Converter={StaticResource validationErrorsConverter}}" IsVisible="{Binding Username.IsValid, Converter={StaticResource inverseBoolConverter}}" />
+            <Label x:Name="emailErrors" Style="{DynamicResource ErrorMessageStyle}" HorizontalOptions="FillAndExpand" Text="{Binding Email.Errors, Converter={StaticResource validationErrorsConverter}}" IsVisible="{Binding Email.IsValid, Converter={StaticResource inverseBoolConverter}}" />
+            
             <BoxView HeightRequest="10" />
+            
             <Frame StyleClass="entry" Style="{StaticResource EntryStyle}">
                 <Frame.Triggers>
                     <DataTrigger TargetType="Frame"
@@ -37,10 +43,22 @@
                         <Setter Property="BorderColor" Value="{DynamicResource DangerBorderColor}" />
                     </DataTrigger>
                 </Frame.Triggers>
-                <controls:TransparentEntry AutomationId="PasswordEntry" HorizontalOptions="FillAndExpand" TextColor="White" PlaceholderColor="White" Placeholder="Password" IsPassword="True" Text="{Binding Password.Value}" IsEnabled="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}" />
+                <controls:TransparentEntry AutomationId="PasswordEntry" HorizontalOptions="FillAndExpand"
+                                           Style="{StaticResource DefaultEntryStyle}"
+                                           Placeholder="Password" IsPassword="True"
+                                           Text="{Binding Password.Value}"
+                                           IsEnabled="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}" />
             </Frame>
-            <Label x:Name="passwordErrors" Style="{DynamicResource ErrorMessageStyle}" FontSize="Small" HorizontalOptions="FillAndExpand" Text="{Binding Password.Errors, Converter={StaticResource validationErrorsConverter}}" IsVisible="{Binding Password.IsValid, Converter={StaticResource inverseBoolConverter}}" />            
+            <Label x:Name="passwordErrors" Style="{DynamicResource ErrorMessageStyle}" FontSize="Small" HorizontalOptions="FillAndExpand" Text="{Binding Password.Errors, Converter={StaticResource validationErrorsConverter}}" IsVisible="{Binding Password.IsValid, Converter={StaticResource inverseBoolConverter}}" />
         </StackLayout>
+        <controls:ButtonContainer Style="{DynamicResource CustomSuccessButtonStyle}"                                  
+                                  Title="Login"                                 
+                                  Icon="{StaticResource LoginIcon}"
+                                  TitleStyle="{DynamicResource ControlLabelStyle}"
+                                  IconStyle="{DynamicResource ControlIconStyle}"
+                                  VerticalOptions="EndAndExpand"
+                                  HorizontalOptions="FillAndExpand"
+                                  Command="{Binding OnLoginCommand}" />
     </StackLayout>
 
 </ContentPage>

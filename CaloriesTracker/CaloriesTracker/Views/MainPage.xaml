@@ -5,8 +5,8 @@
              Title="{Binding Title}"
              AutomationId="MainScreen">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="10">
+        <Label Style="{DynamicResource ControlLabelStyle}" Text="Welcome to Xamarin Forms and Prism!" />
     </StackLayout>
 
 </ContentPage>

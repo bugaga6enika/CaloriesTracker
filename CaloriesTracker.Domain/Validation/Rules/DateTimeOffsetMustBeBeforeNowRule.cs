@@ -13,7 +13,7 @@ namespace CaloriesTracker.Domain.Validation.Rules
 
             if (validState == Invalid)
             {
-                return InvalidResult(new ValidationException("Given date time offset is not after now", !string.IsNullOrWhiteSpace(ObjectName) ? ObjectName : "Date time value"));
+                return InvalidResult(new ValidationException("Given date time offset is not before now", !string.IsNullOrWhiteSpace(ObjectName) ? ObjectName : "Date time value"));
             }
 
             return ValidResult;

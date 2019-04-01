@@ -40,7 +40,8 @@ namespace CaloriesTracker.Application.Configuration.IoC
             // Application layer
             builder.RegisterAssemblyTypes(typeof(ServiceLocator).GetTypeInfo().Assembly).AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(ValidationPipelineBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-#if DEBUG
+
+#if RESTMOCK
             builder.RegisterInstance(Infrastructure.Mock.Rest.HttpClientFactory.Create());
 #else
             builder.RegisterInstance(Configurator.HttpClient);

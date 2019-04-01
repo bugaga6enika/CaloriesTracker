@@ -3,6 +3,7 @@ using CaloriesTracker.Application.InternalAuth.RegistrationSteps.Goal;
 using CaloriesTracker.Domain.InternalAuth;
 using CaloriesTracker.Models.Registration.Events;
 using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -59,12 +60,28 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
 
             Disposables.Add(
                 Observable.FromAsync(() => Mediator.Send(new GetCurrentBodyShapeQuery()))
-                .Subscribe(currentBodyShape => Device.BeginInvokeOnMainThread(() =>
+                .Subscribe(async currentBodyShape =>
                 {
-                    CurrentWeight.Value = currentBodyShape.CurrentWeight;
-                    TargetWeight.Value = currentBodyShape.TargetWeight;
-                    Height.Value = currentBodyShape.Height;
-                }))
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        CurrentWeight.Value = currentBodyShape.CurrentWeight;
+                        TargetWeight.Value = currentBodyShape.TargetWeight;
+                        Height.Value = currentBodyShape.Height;
+                    });
+
+                    // Wait > 700 ms to complete the validation
+                    await Task.Delay(1000);
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        CurrentWeight.Errors = new List<string>();
+                        CurrentWeight.IsValid = true;
+                        TargetWeight.Errors = new List<string>();
+                        TargetWeight.IsValid = true;
+                        Height.Errors = new List<string>();
+                        Height.IsValid = true;
+                    });
+                })
             );
 
             Disposables.Add(CurrentWeight.ToObservable(x => x.Value).Throttle(TimeSpan.FromMilliseconds(700)).Subscribe(x => { CurrentWeight.Validate(); }));

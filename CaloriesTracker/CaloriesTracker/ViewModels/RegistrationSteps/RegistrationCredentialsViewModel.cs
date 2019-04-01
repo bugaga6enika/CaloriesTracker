@@ -1,14 +1,16 @@
 ﻿using CaloriesTracker.Application.InternalAuth.RegistrationSteps.Credentials;
 using CaloriesTracker.Domain.Abstractions.Core;
 using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+using CaloriesTracker.Models.Registration.Events;
 using Prism.Commands;
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using XForms.Utils.Core;
 using XForms.Utils.Validation;
 using XForms.Utils.Validation.Rules;
-using XForms.Utils.Core;
-using CaloriesTracker.Models.Registration.Events;
 
 namespace CaloriesTracker.ViewModels.RegistrationSteps
 {
@@ -62,6 +64,17 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
         {
             try
             {
+                if (Connectivity.NetworkAccess != NetworkAccess.Internet
+                    && Connectivity.NetworkAccess != NetworkAccess.ConstrainedInternet)
+                {
+                    Device.BeginInvokeOnMainThread(async () => await ShowInfoAsync("Connectivity lost",
+                        (string)App.Current.Resources["WiFiIcon"],
+                        @"It looks like you don't have internet connection. Please, check if you are connected to Wifi or Mobile Internet or maybe you've enabled airplane mode.
+If you are unable to connect to internet right away don't worry and come back later, we've stored all your steps (except credentials) so you won't be needed to fill them once again."));
+
+                    return;
+                }
+
                 OnRequestStarted();
 
                 var registrationObservable = Observable.FromAsync(() =>
@@ -74,7 +87,7 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
                         _registrationInfo.TargetWeight,
                         _registrationInfo.Height,
                         _registrationInfo.DateOfBirth));
-                })               
+                })
                 .Retry(3);
 
                 Disposables.Add(registrationObservable.Subscribe(
