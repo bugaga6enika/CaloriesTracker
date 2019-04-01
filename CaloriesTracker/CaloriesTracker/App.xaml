@@ -26,7 +26,10 @@
         <Color x:Key="DangerBorderColor">#d10a0a</Color>
         <Color x:Key="EntryBorderColor">#ffffff</Color>
         <Color x:Key="DangerMessageColor">#ff8282</Color>
-        
+
+        <Color x:Key="PopUpTitleColor">#000000</Color>
+        <Color x:Key="PopUpDescriptionColor">#3a3a3a</Color>
+
         <!-- /Colors -->
 
         <!-- Icons -->
@@ -37,7 +40,8 @@
         <x:String x:Key="RightArrowIcon">&#xe684;</x:String>
         <x:String x:Key="CheckIcon">&#xe66c;</x:String>
         <x:String x:Key="MaleIcon">&#xe6ba;</x:String>
-        <x:String x:Key="FemaleIcon">&#xe6b2;</x:String>        
+        <x:String x:Key="FemaleIcon">&#xe6b2;</x:String>
+        <x:String x:Key="WiFiIcon">&#xe613;</x:String>        
 
         <!-- /Icons -->
 
@@ -95,6 +99,21 @@
         <Style x:Key="ControlIconStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource FontIcon}" />
             <Setter Property="TextColor" Value="{DynamicResource ControlLabelColor}" />
+        </Style>
+
+        <Style x:Key="PopUpTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="{DynamicResource PopUpTitleColor}" />
+        </Style>
+
+        <Style x:Key="PopUpDescriptionStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="TextColor" Value="{DynamicResource PopUpDescriptionColor}" />
+        </Style>
+
+        <Style x:Key="PopUpIconStyle" TargetType="Label" BasedOn="{StaticResource ControlIconStyle}">
+            <Setter Property="FontSize" Value="46" />
+            <Setter Property="TextColor" Value="{DynamicResource PopUpTitleColor}" />
         </Style>
 
         <!-- /Label Syles-->

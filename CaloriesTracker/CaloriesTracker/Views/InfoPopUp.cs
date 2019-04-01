@@ -6,29 +6,29 @@ using XForms.Utils.CustomControls;
 
 namespace CaloriesTracker.Views
 {
-    public class ErrorPopUp : AwaitablePopUp<bool>, IDisposable
+    public class InfoPopUp : AwaitablePopUp<bool>, IDisposable
     {
-        public ErrorPopUp() : base(new ErrorView(), DefaultBackgroundColor)
+        public InfoPopUp() : base(new InfoView(), DefaultBackgroundColor)
         {
-            if (Content is ErrorView)
-            {                
-                (Content as ErrorView).ConfirmEventHandler += OnConfirmEventHandler;
+            if (Content is InfoView)
+            {
+                (Content as InfoView).ConfirmEventHandler += OnConfirmEventHandler;
             }
         }
 
-        public void SetDetails(string errorDetails)
+        public void SetDetails(string title, string icon, string details)
         {
-            if (Content is ErrorView)
+            if (Content is InfoView)
             {
-                (Content as ErrorView).SetErrorDetails(errorDetails);
+                (Content as InfoView).SetInfoDetails(title, icon, details);
             }
         }
 
         public void Dispose()
         {
-            if (Content is ErrorView)
+            if (Content is InfoView)
             {
-                (Content as ErrorView).ConfirmEventHandler -= OnConfirmEventHandler;
+                (Content as InfoView).ConfirmEventHandler -= OnConfirmEventHandler;
             }
         }
 

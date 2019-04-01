@@ -99,12 +99,22 @@ namespace CaloriesTracker.ViewModels
 
         protected virtual async Task ShowErrorAsync(string title, string content, TimeSpan duration)
         {
-            using (var errorPopUp = new ErrorPopUp(content))
+            using (var errorPopUp = new ErrorPopUp())
             {
+                errorPopUp.SetDetails(content);
                 await errorPopUp.GetResultAsync();
             }
         }
         //=> PageDialogService.DisplayAlertAsync(title, content, "OK");
+
+        protected virtual async Task ShowInfoAsync(string title, string icon, string content, TimeSpan duration)
+        {
+            using (var infoPopUp = new InfoPopUp())
+            {
+                infoPopUp.SetDetails(title, icon, content);
+                await infoPopUp.GetResultAsync();
+            }
+        }
 
         protected virtual void OnFailure(string message, Exception e)
         {
