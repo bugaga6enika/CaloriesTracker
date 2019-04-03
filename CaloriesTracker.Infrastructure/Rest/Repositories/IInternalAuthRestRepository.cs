@@ -1,5 +1,5 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
-using CaloriesTracker.Infrastructure.InternalAuth;
+﻿using CaloriesTracker.Domain.User;
+using CaloriesTracker.Infrastructure.User;
 using Refit;
 using System.Threading;
 using System.Threading.Tasks;

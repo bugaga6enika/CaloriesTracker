@@ -1,9 +1,9 @@
-﻿using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User.RegistrationSteps;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.Gender
+namespace CaloriesTracker.Application.User.RegistrationSteps.Gender
 {
     public class SaveGenderCommandHandler : IRequestHandler<SaveGenderCommand, bool>
     {

@@ -1,5 +1,5 @@
-﻿using CaloriesTracker.Application.InternalAuth.RegistrationSteps.Gender;
-using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Application.User.RegistrationSteps.Gender;
+using CaloriesTracker.Domain.User;
 using Prism.Commands;
 using System;
 using System.Reactive.Linq;
@@ -12,15 +12,15 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
 {
     public class RegistrationGenderViewModel : RegistrationStepBaseViewModel
     {
-        public ValidatableObject<Gender> Gender { get; private set; }
+        public ValidatableObject<GenderType> Gender { get; private set; }
 
         public DelegateCommand<object> OnGenderSelectCommand { get; private set; }
 
         public RegistrationGenderViewModel()
         {
-            Gender = new ValidatableObject<Gender>();
-            Gender.Validations.Add(new EnumShouldBeGreaterThenZeroRule<Gender>());
-            Gender.SetAndValidate(Domain.InternalAuth.Gender.NotSpecified);
+            Gender = new ValidatableObject<GenderType>();
+            Gender.Validations.Add(new EnumShouldBeGreaterThenZeroRule<GenderType>());
+            Gender.SetAndValidate(Domain.User.GenderType.NotSpecified);
 
             OnGenderSelectCommand = new DelegateCommand<object>(gender => OnGenderSelectCommandHandler(gender));
 
@@ -31,7 +31,7 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
         }
 
         private void OnGenderSelectCommandHandler(object gender)
-            => Gender.SetAndValidate((Gender)gender);
+            => Gender.SetAndValidate((GenderType)gender);
 
         protected override Task<bool> BeforeGoNext()
         {

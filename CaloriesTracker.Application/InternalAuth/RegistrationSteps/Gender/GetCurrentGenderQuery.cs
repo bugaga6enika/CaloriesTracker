@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.Gender
+namespace CaloriesTracker.Application.User.RegistrationSteps.Gender
 {
-    public class GetCurrentGenderQuery : IRequest<Domain.InternalAuth.Gender>
+    public class GetCurrentGenderQuery : IRequest<Domain.User.GenderType>
     {
     }
 }

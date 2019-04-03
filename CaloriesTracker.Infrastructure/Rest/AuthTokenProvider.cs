@@ -1,6 +1,6 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Domain.User;
 using CaloriesTracker.Infrastructure.Configuration;
-using CaloriesTracker.Infrastructure.InternalAuth;
+using CaloriesTracker.Infrastructure.User;
 using Newtonsoft.Json;
 using Refit;
 using System;

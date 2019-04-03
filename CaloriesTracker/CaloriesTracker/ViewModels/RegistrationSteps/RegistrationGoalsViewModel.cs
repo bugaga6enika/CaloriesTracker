@@ -1,5 +1,5 @@
-﻿using CaloriesTracker.Application.InternalAuth.RegistrationSteps.Goal;
-using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Application.User.RegistrationSteps.Goal;
+using CaloriesTracker.Domain.User;
 using CaloriesTracker.Models.Registration.Events;
 using Prism.Commands;
 using System;

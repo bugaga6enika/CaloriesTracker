@@ -1,10 +1,10 @@
 ﻿using CaloriesTracker.Domain.Abstractions.Core;
-using CaloriesTracker.Domain.InternalAuth;
+using CaloriesTracker.Domain.User;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.Credentials
+namespace CaloriesTracker.Application.User.RegistrationSteps.Credentials
 {
     public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, OperationResult>
     {

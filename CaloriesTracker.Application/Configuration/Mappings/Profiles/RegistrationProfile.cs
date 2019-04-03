@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape;
-using CaloriesTracker.Application.InternalAuth.RegistrationSteps.Credentials;
+using CaloriesTracker.Application.User.RegistrationSteps.BodyShape;
+using CaloriesTracker.Application.User.RegistrationSteps.Credentials;
 
 namespace CaloriesTracker.Application.Configuration.Mappings.Profiles
 {
@@ -8,16 +8,19 @@ namespace CaloriesTracker.Application.Configuration.Mappings.Profiles
     {
         public RegistrationProfile()
         {
-            CreateMap<RegistrationCommand, Domain.InternalAuth.RegistrationRequest>()
-                .ConstructUsing(registrationCommand => Domain.InternalAuth.RegistrationRequest.Create(registrationCommand.Email,
+            CreateMap<RegistrationCommand, Domain.User.RegistrationRequest>()
+                .ConstructUsing(registrationCommand => Domain.User.RegistrationRequest.Create(registrationCommand.Email,
+                registrationCommand.Password,
                 registrationCommand.Goal,
                 registrationCommand.Gender,
                 registrationCommand.CurrentWeight,
                 registrationCommand.TargetWeight,
                 registrationCommand.Height,
-                registrationCommand.DateOfBirth));
+                registrationCommand.DateOfBirth,
+                registrationCommand.WeightUnit,
+                registrationCommand.HeightUnit));
 
-            CreateMap<SaveBodyShapeCommand, Domain.InternalAuth.BodyShape>();
+            CreateMap<SaveBodyShapeCommand, Domain.User.BodyShape>();
         }
     }
 }

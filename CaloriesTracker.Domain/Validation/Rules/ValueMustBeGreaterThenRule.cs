@@ -6,7 +6,7 @@ using static CaloriesTracker.Domain.Abstractions.Validation.ValidationState;
 
 namespace CaloriesTracker.Domain.Validation.Rules
 {
-    public class ValueMustBeGreaterThenRule<T> : ValidationRule<T> //where T : struct
+    public class ValueMustBeGreaterThenRule<T> : ValidationRule<T> where T : IComparable<T>
     {
         private readonly T _bottomThreshold;
 
@@ -26,11 +26,37 @@ namespace CaloriesTracker.Domain.Validation.Rules
 
             return ValidResult;
         }
-    }   
+    }
+
+    public class ValueMustBeGreaterThenIfRule<T> : ValidationRule<T> where T : IComparable<T>
+    {
+        private readonly Func<T> _bottomThresholdRef;
+        private readonly Func<bool> _conditionToCheck;
+
+        public ValueMustBeGreaterThenIfRule(Func<T> bottomThreshold, Func<bool> conditionToCheck, string reference)
+        {
+            _bottomThresholdRef = bottomThreshold;
+            _conditionToCheck = conditionToCheck;
+        }
+
+        protected override ValidationResult CoreCheck(T value)
+        {
+            var validState = _conditionToCheck.Invoke() 
+                ? value.IsGreaterThen(_bottomThresholdRef.Invoke()) ? Valid : Invalid
+                : Valid;
+
+            if (validState == Invalid)
+            {
+                return InvalidResult(new ValidationException($"Value must be greater then {_bottomThresholdRef.Invoke()}", !string.IsNullOrWhiteSpace(ObjectName) ? ObjectName : typeof(T).Name));
+            }
+
+            return ValidResult;
+        }
+    }
 
     public static class ValueMustBeGreaterThenRuleExtensions
     {
-        public static bool IsGreaterThen<T>(this T @this, T value) //where T : struct
+        public static bool IsGreaterThen<T>(this T @this, T value) where T : IComparable<T>
         {
             return Comparer<T>.Default.Compare(@this, value) > 0;
         }

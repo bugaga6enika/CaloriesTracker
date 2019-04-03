@@ -1,10 +1,10 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Domain.User;
 using CaloriesTracker.Infrastructure.Rest;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth
+namespace CaloriesTracker.Application.User
 {
     public class GetCurrentAuthTokenQueryHandler : IRequestHandler<GetCurrentAuthTokenQuery, AuthToken>
     {

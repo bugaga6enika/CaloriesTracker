@@ -1,6 +1,6 @@
-﻿using CaloriesTracker.Application.InternalAuth.RegistrationSteps.Credentials;
+﻿using CaloriesTracker.Application.User.RegistrationSteps.Credentials;
 using CaloriesTracker.Domain.Abstractions.Core;
-using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+using CaloriesTracker.Domain.User.RegistrationSteps;
 using CaloriesTracker.Models.Registration.Events;
 using Prism.Commands;
 using System;
@@ -86,7 +86,9 @@ If you are unable to connect to internet right away don't worry and come back la
                         _registrationInfo.CurrentWeight,
                         _registrationInfo.TargetWeight,
                         _registrationInfo.Height,
-                        _registrationInfo.DateOfBirth));
+                        _registrationInfo.DateOfBirth,
+                        Domain.User.WeightUnit.Kilogram,
+                        Domain.User.HeightUnit.Centimeter));
                 })
                 .Retry(3);
 

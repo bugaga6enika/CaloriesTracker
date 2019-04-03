@@ -1,9 +1,9 @@
-﻿using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User.RegistrationSteps;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.DateOfBirth
+namespace CaloriesTracker.Application.User.RegistrationSteps.DateOfBirth
 {
     public class SaveDateOfBirthCommandHandler : IRequestHandler<SaveDateOfBirthCommand, bool>
     {

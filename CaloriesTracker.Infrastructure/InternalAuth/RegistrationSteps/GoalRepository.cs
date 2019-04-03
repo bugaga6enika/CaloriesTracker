@@ -1,11 +1,11 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
-using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User;
+using CaloriesTracker.Domain.User.RegistrationSteps;
 using CaloriesTracker.Infrastructure.LocalStorage;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Infrastructure.InternalAuth.RegistrationSteps
+namespace CaloriesTracker.Infrastructure.User.RegistrationSteps
 {
     internal class GoalRepository : LocalStorageRepository<RegistrationInfo>, IGoalRepository
     {

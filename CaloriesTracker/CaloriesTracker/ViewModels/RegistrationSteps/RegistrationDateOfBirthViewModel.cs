@@ -1,4 +1,4 @@
-﻿using CaloriesTracker.Application.InternalAuth.RegistrationSteps.DateOfBirth;
+﻿using CaloriesTracker.Application.User.RegistrationSteps.DateOfBirth;
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;

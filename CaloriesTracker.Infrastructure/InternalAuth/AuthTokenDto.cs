@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CaloriesTracker.Infrastructure.InternalAuth
+namespace CaloriesTracker.Infrastructure.User
 {
     public class AuthTokenDto
     {

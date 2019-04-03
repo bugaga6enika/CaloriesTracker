@@ -1,5 +1,5 @@
-﻿using CaloriesTracker.Application.InternalAuth;
-using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Application.User;
+using CaloriesTracker.Domain.User;
 using CaloriesTracker.Views;
 using Prism.Commands;
 using Prism.Navigation;

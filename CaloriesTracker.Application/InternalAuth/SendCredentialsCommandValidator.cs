@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using CaloriesTracker.Domain.Validation.Rules;
 
-namespace CaloriesTracker.Application.InternalAuth
+namespace CaloriesTracker.Application.User
 {
     internal sealed class SendCredentialsCommandValidator : AbstractValidator<SendCredentialsCommand>
     {

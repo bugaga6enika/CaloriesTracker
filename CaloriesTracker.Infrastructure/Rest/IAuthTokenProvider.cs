@@ -1,4 +1,4 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Domain.User;
 using System.Threading.Tasks;
 
 namespace CaloriesTracker.Infrastructure.Rest

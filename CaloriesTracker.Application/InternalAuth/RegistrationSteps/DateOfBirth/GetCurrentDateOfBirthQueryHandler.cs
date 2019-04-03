@@ -1,10 +1,10 @@
-﻿using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User.RegistrationSteps;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.DateOfBirth
+namespace CaloriesTracker.Application.User.RegistrationSteps.DateOfBirth
 {
     public class GetCurrentDateOfBirthQueryHandler : IRequestHandler<GetCurrentDateOfBirthQuery, DateTimeOffset>
     {

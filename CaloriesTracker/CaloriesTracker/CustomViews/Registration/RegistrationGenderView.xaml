@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:converters="clr-namespace:XForms.Utils.Converters;assembly=XForms.Utils"
-             xmlns:domain="clr-namespace:CaloriesTracker.Domain.InternalAuth;assembly=CaloriesTracker.Domain"
+             xmlns:domain="clr-namespace:CaloriesTracker.Domain.User;assembly=CaloriesTracker.Domain"
              x:Class="CaloriesTracker.CustomViews.Registration.RegistrationGenderView"
              x:Name="genderView">
 
@@ -28,13 +28,13 @@
                    HeightRequest="36" Margin="5">
                 <StackLayout Orientation="Horizontal">
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OnGenderSelectCommand}" CommandParameter="{x:Static domain:Gender.Male}" />
+                        <TapGestureRecognizer Command="{Binding OnGenderSelectCommand}" CommandParameter="{x:Static domain:GenderType.Male}" />
                     </StackLayout.GestureRecognizers>
                     <Label Text="{StaticResource MaleIcon}" FontSize="36" HorizontalOptions="Start" VerticalOptions="Center" Style="{DynamicResource ControlIconStyle}"  />
                     <Label Text="I'm male" TextColor="{DynamicResource ControlLabelColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                     <Label Text="{StaticResource CheckIcon}"
                            Style="{DynamicResource ControlIconStyle}" 
-                           IsVisible="{Binding Gender.Value, Converter={StaticResource enumToBoolConverter}, ConverterParameter={x:Static domain:Gender.Male}}"
+                           IsVisible="{Binding Gender.Value, Converter={StaticResource enumToBoolConverter}, ConverterParameter={x:Static domain:GenderType.Male}}"
                            FontSize="36"
                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
                 </StackLayout>
@@ -46,13 +46,13 @@
                    HeightRequest="36" Margin="5">
                 <StackLayout Orientation="Horizontal">
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OnGenderSelectCommand}" CommandParameter="{x:Static domain:Gender.Female}" />
+                        <TapGestureRecognizer Command="{Binding OnGenderSelectCommand}" CommandParameter="{x:Static domain:GenderType.Female}" />
                     </StackLayout.GestureRecognizers>
                     <Label Text="{StaticResource FemaleIcon}" FontSize="36" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Style="{DynamicResource ControlIconStyle}"  />
                     <Label Text="I'm female" TextColor="{DynamicResource ControlLabelColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                     <Label Text="{StaticResource CheckIcon}"
                            Style="{DynamicResource ControlIconStyle}" 
-                           IsVisible="{Binding Gender.Value, Converter={StaticResource enumToBoolConverter}, ConverterParameter={x:Static domain:Gender.Female}}"
+                           IsVisible="{Binding Gender.Value, Converter={StaticResource enumToBoolConverter}, ConverterParameter={x:Static domain:GenderType.Female}}"
                            FontSize="36"
                            VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
                 </StackLayout>

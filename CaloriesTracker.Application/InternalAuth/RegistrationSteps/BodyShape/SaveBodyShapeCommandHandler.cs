@@ -1,9 +1,9 @@
-﻿using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User.RegistrationSteps;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape
+namespace CaloriesTracker.Application.User.RegistrationSteps.BodyShape
 {
     public class SaveBodyShapeCommandHandler : IRequestHandler<SaveBodyShapeCommand, bool>
     {
@@ -15,6 +15,6 @@ namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape
         }
 
         public Task<bool> Handle(SaveBodyShapeCommand request, CancellationToken cancellationToken)
-            => _bodyShapeRepository.Save(Configuration.Mappings.Mapper.Current.Map<Domain.InternalAuth.BodyShape>(request), cancellationToken);
+            => _bodyShapeRepository.Save(Configuration.Mappings.Mapper.Current.Map<Domain.User.BodyShape>(request), cancellationToken);
     }
 }

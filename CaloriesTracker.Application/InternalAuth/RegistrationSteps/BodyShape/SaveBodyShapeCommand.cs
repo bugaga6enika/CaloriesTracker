@@ -1,7 +1,7 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Domain.User;
 using MediatR;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape
+namespace CaloriesTracker.Application.User.RegistrationSteps.BodyShape
 {
     public class SaveBodyShapeCommand : IRequest<bool>
     {

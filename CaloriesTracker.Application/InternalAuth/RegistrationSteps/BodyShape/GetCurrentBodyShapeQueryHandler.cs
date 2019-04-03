@@ -1,11 +1,11 @@
-﻿using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User.RegistrationSteps;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape
+namespace CaloriesTracker.Application.User.RegistrationSteps.BodyShape
 {
-    public class GetCurrentBodyShapeQueryHandler : IRequestHandler<GetCurrentBodyShapeQuery, Domain.InternalAuth.BodyShape>
+    public class GetCurrentBodyShapeQueryHandler : IRequestHandler<GetCurrentBodyShapeQuery, Domain.User.BodyShape>
     {
         private readonly IBodyShapeRepository _bodyShapeRepository;
 
@@ -14,7 +14,7 @@ namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape
             _bodyShapeRepository = bodyShapeRepository;
         }
 
-        public Task<Domain.InternalAuth.BodyShape> Handle(GetCurrentBodyShapeQuery request, CancellationToken cancellationToken)
+        public Task<Domain.User.BodyShape> Handle(GetCurrentBodyShapeQuery request, CancellationToken cancellationToken)
             => _bodyShapeRepository.GetCurrent();
     }
 }

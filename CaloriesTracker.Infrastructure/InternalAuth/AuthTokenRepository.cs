@@ -1,12 +1,12 @@
 ﻿using CaloriesTracker.Domain.Abstractions.Core;
-using CaloriesTracker.Domain.InternalAuth;
+using CaloriesTracker.Domain.User;
 using CaloriesTracker.Infrastructure.Configuration;
 using CaloriesTracker.Infrastructure.Rest.Repositories;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Infrastructure.InternalAuth
+namespace CaloriesTracker.Infrastructure.User
 {
     public class AuthTokenRepository : RestRepositoryBase<IInternalAuthRestRepository>, IInternalAuthRepository
     {

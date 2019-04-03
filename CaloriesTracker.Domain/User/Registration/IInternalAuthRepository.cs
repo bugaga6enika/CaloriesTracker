@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Domain.InternalAuth
+namespace CaloriesTracker.Domain.User
 {
     public interface IInternalAuthRepository
     {

@@ -1,10 +1,10 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
-using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User;
+using CaloriesTracker.Domain.User.RegistrationSteps;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.Goal
+namespace CaloriesTracker.Application.User.RegistrationSteps.Goal
 {
     public class GetCurrentGoalQueryHandler : IRequestHandler<GetCurrentGoalQuery, GoalType>
     {

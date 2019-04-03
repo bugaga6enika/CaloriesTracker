@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.DateOfBirth
+namespace CaloriesTracker.Application.User.RegistrationSteps.DateOfBirth
 {
     public class SaveDateOfBirthCommand : IRequest<bool>
     {

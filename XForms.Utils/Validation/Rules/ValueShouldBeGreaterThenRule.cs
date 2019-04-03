@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using XForms.Utils.Validation.Contracts;
 
 namespace XForms.Utils.Validation.Rules
@@ -51,6 +52,46 @@ namespace XForms.Utils.Validation.Rules
         public bool Check(double? value)
         {
             return value.HasValue && value > _bottomThreshold;
+        }
+    }
+
+    public class DoubleValueShouldBeGreaterThenIfRule<T> : IValidationRule<T> where T : IComparable
+    {
+        public string ValidationMessage { get; set; }
+
+        private readonly Func<T> _bottomThresholdRef;
+        private readonly Func<bool> _conditionToCheck;
+
+        public DoubleValueShouldBeGreaterThenIfRule(Func<T> bottomThreshold, Func<bool> conditionToCheck, string reference)
+        {
+            _bottomThresholdRef = bottomThreshold;
+            _conditionToCheck = conditionToCheck;
+            ValidationMessage = $"Value should be greater then {reference}";
+        }
+
+        public bool Check(T value)
+        {
+            return _conditionToCheck.Invoke() ? value.CompareTo(_bottomThresholdRef.Invoke()) > 0 : true;
+        }
+    }
+
+    public class DoubleValueShouldBeGreaterThenIfRule : IValidationRule<double?>
+    {
+        public string ValidationMessage { get; set; }
+
+        private readonly Func<double?> _bottomThresholdRef;
+        private readonly Func<bool> _conditionToCheck;
+
+        public DoubleValueShouldBeGreaterThenIfRule(Func<double?> bottomThreshold, Func<bool> conditionToCheck, string reference)
+        {
+            _bottomThresholdRef = bottomThreshold;
+            _conditionToCheck = conditionToCheck;
+            ValidationMessage = $"Value should be greater then {reference}";
+        }
+
+        public bool Check(double? value)
+        {
+            return _conditionToCheck.Invoke() ? value > _bottomThresholdRef.Invoke() : true;
         }
     }
 }

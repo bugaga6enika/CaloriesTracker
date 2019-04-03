@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace CaloriesTracker.Domain.InternalAuth.RegistrationSteps
+namespace CaloriesTracker.Domain.User.RegistrationSteps
 {
     public class RegistrationInfo
     {
         public GoalType Goal { get; set; }
-        public Gender Gender { get; set; }
+        public GenderType Gender { get; set; }
         public double CurrentWeight { get; set; }
         public double? TargetWeight { get; set; }
         public int Height { get; set; }

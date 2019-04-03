@@ -1,4 +1,4 @@
-﻿using CaloriesTracker.Infrastructure.InternalAuth;
+﻿using CaloriesTracker.Infrastructure.User;
 using CaloriesTracker.Infrastructure.Rest;
 using Newtonsoft.Json;
 using RichardSzalay.MockHttp;

@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape
+namespace CaloriesTracker.Application.User.RegistrationSteps.BodyShape
 {
-    public class GetCurrentBodyShapeQuery : IRequest<Domain.InternalAuth.BodyShape>
+    public class GetCurrentBodyShapeQuery : IRequest<Domain.User.BodyShape>
     {
     }
 }

@@ -1,6 +1,6 @@
-﻿using CaloriesTracker.Application.InternalAuth.RegistrationSteps.BodyShape;
-using CaloriesTracker.Application.InternalAuth.RegistrationSteps.Goal;
-using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Application.User.RegistrationSteps.BodyShape;
+using CaloriesTracker.Application.User.RegistrationSteps.Goal;
+using CaloriesTracker.Domain.User;
 using CaloriesTracker.Models.Registration.Events;
 using System;
 using System.Collections.Generic;
@@ -45,12 +45,17 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
             _goalChangedEvent.Subscribe(GoalChangedEventHandler);
 
             CurrentWeight = new ValidatableObject<double?>();
-            CurrentWeight.Validations.Add(new DoubleValueShouldBeGreaterThenRule(0));
-
             TargetWeight = new ValidatableObject<double?>();
-            TargetWeight.Validations.Add(new DoubleValueShouldBeGreaterThenRule(0));
-
             Height = new ValidatableObject<int?>();
+
+            CurrentWeight.Validations.Add(new DoubleValueShouldBeGreaterThenRule(0));
+            CurrentWeight.Validations.Add(new DoubleValueShouldBeGreaterThenIfRule(() => TargetWeight.Value, () => CurrentGoal == GoalType.LooseWeight, nameof(TargetWeight)));
+            CurrentWeight.Validations.Add(new DoubleValueShouldBeLessThenIfRule(() => TargetWeight.Value, () => CurrentGoal == GoalType.GainWeight, nameof(TargetWeight)));
+                        
+            TargetWeight.Validations.Add(new DoubleValueShouldBeGreaterThenIfRule(() => 0, () => CurrentGoal == GoalType.GainWeight || CurrentGoal == GoalType.LooseWeight, "0"));
+            TargetWeight.Validations.Add(new DoubleValueShouldBeGreaterThenIfRule(() => CurrentWeight.Value, () => CurrentGoal == GoalType.GainWeight, nameof(CurrentWeight)));
+            TargetWeight.Validations.Add(new DoubleValueShouldBeLessThenIfRule(() => CurrentWeight.Value, () => CurrentGoal == GoalType.LooseWeight, nameof(CurrentWeight)));
+                        
             Height.Validations.Add(new IntValueShouldBeGreaterThenRule(0));
 
             Disposables.Add(
@@ -84,8 +89,8 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
                 })
             );
 
-            Disposables.Add(CurrentWeight.ToObservable(x => x.Value).Throttle(TimeSpan.FromMilliseconds(700)).Subscribe(x => { CurrentWeight.Validate(); }));
-            Disposables.Add(TargetWeight.ToObservable(x => x.Value).Throttle(TimeSpan.FromMilliseconds(700)).Subscribe(x => { if (CurrentGoal == GoalType.GainWeight || CurrentGoal == GoalType.LooseWeight) { TargetWeight.Validate(); } }));
+            Disposables.Add(CurrentWeight.ToObservable(x => x.Value).Throttle(TimeSpan.FromMilliseconds(700)).Subscribe(x => { CurrentWeight.Validate(); TargetWeight.Validate(); }));
+            Disposables.Add(TargetWeight.ToObservable(x => x.Value).Throttle(TimeSpan.FromMilliseconds(700)).Subscribe(x => { CurrentWeight.Validate(); TargetWeight.Validate(); }));
             Disposables.Add(Height.ToObservable(x => x.Value).Throttle(TimeSpan.FromMilliseconds(700)).Subscribe(x => { Height.Validate(); }));
         }
 
@@ -94,19 +99,20 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
 
         protected override Task<bool> BeforeGoNext()
         {
-            CurrentWeight.Validate();
-            Height.Validate();
+            //CurrentWeight.Validate();
+            //Height.Validate();
+            //TargetWeight.Validate();
 
-            var isValid = CurrentWeight.IsValid && Height.IsValid;
+            var isValid = CurrentWeight.Validate() && Height.Validate() && TargetWeight.Validate();
 
-            if (CurrentGoal != GoalType.SaveWeight)
-            {
-                TargetWeight.Validate();
+            //if (CurrentGoal != GoalType.SaveWeight)
+            //{
+            //    TargetWeight.Validate();
 
-                isValid &= TargetWeight.IsValid;
-            }
+            //    isValid &= TargetWeight.IsValid;
+            //}
 
-            if (isValid)
+            if (CurrentWeight.Validate() && Height.Validate() && TargetWeight.Validate())
             {
                 return Mediator.Send(new SaveBodyShapeCommand(CurrentWeight.Value.Value, TargetWeight.Value, Height.Value.Value, CurrentGoal));
             }

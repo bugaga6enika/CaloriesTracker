@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using CaloriesTracker.Application.Pipelines;
-using CaloriesTracker.Domain.InternalAuth;
+using CaloriesTracker.Domain.User;
 using MediatR;
 using System;
 using System.Reflection;

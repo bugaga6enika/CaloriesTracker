@@ -1,14 +1,14 @@
 ﻿using MediatR;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.Gender
+namespace CaloriesTracker.Application.User.RegistrationSteps.Gender
 {
     public class SaveGenderCommand : IRequest<bool>
     {
-        public SaveGenderCommand(Domain.InternalAuth.Gender gender)
+        public SaveGenderCommand(Domain.User.GenderType gender)
         {
             Gender = gender;
         }
 
-        public Domain.InternalAuth.Gender Gender { get; }
+        public Domain.User.GenderType Gender { get; }
     }
 }

@@ -51,9 +51,16 @@ namespace CaloriesTracker.ViewModels.RegistrationSteps
         {
             Device.BeginInvokeOnMainThread(() => IsBusy = true);
 
-            if (await BeforeGoNext().ConfigureAwait(false))
+            try
             {
-                _goNextRegistrationStepEvent.Publish();
+                if (await BeforeGoNext().ConfigureAwait(false))
+                {
+                    _goNextRegistrationStepEvent.Publish();
+                }
+            }
+            catch (Exception e)
+            {
+                OnFailure(e.Message, e);
             }
 
             Device.BeginInvokeOnMainThread(() => IsBusy = false);

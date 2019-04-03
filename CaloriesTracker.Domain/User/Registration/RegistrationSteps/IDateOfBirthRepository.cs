@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Domain.InternalAuth.RegistrationSteps
+namespace CaloriesTracker.Domain.User.RegistrationSteps
 {
     public interface IDateOfBirthRepository
     {

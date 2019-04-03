@@ -1,7 +1,7 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
+﻿using CaloriesTracker.Domain.User;
 using MediatR;
 
-namespace CaloriesTracker.Application.InternalAuth
+namespace CaloriesTracker.Application.User
 {
     public class SendCredentialsCommand : IRequest<AuthToken>
     {

@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:XForms.Utils.CustomControls;assembly=XForms.Utils"
              xmlns:converters="clr-namespace:XForms.Utils.Converters;assembly=XForms.Utils"
              xmlns:local="clr-namespace:CaloriesTracker.ViewModels.RegistrationSteps"
-             xmlns:domain="clr-namespace:CaloriesTracker.Domain.InternalAuth;assembly=CaloriesTracker.Domain"                                          
+             xmlns:domain="clr-namespace:CaloriesTracker.Domain.User;assembly=CaloriesTracker.Domain"                                          
              x:Name="baseView"
              x:Class="CaloriesTracker.CustomViews.Registration.RegistrationGoalsView">
     

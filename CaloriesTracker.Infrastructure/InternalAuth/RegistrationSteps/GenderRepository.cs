@@ -1,11 +1,11 @@
-﻿using CaloriesTracker.Domain.InternalAuth;
-using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User;
+using CaloriesTracker.Domain.User.RegistrationSteps;
 using CaloriesTracker.Infrastructure.LocalStorage;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CaloriesTracker.Infrastructure.InternalAuth.RegistrationSteps
+namespace CaloriesTracker.Infrastructure.User.RegistrationSteps
 {
     internal class GenderRepository : LocalStorageRepository<RegistrationInfo>, IGenderRepository
     {
@@ -13,13 +13,13 @@ namespace CaloriesTracker.Infrastructure.InternalAuth.RegistrationSteps
         {
         }
 
-        public async Task<Gender> GetCurrent()
+        public async Task<GenderType> GetCurrent()
         {
             var registrationInfo = await Get();
             return registrationInfo.Gender;
         }
 
-        public async Task<bool> Save(Gender gender, CancellationToken cancellationToken)
+        public async Task<bool> Save(GenderType gender, CancellationToken cancellationToken)
         {
             var registrationInfo = await Get();
 

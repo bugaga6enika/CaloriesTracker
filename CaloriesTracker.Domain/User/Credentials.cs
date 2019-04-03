@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace CaloriesTracker.Domain.InternalAuth
+namespace CaloriesTracker.Domain.User
 {
     public class Credentials : ValueObject
     {

@@ -1,4 +1,4 @@
-﻿using CaloriesTracker.Infrastructure.InternalAuth;
+﻿using CaloriesTracker.Infrastructure.User;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;

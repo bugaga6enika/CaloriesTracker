@@ -1,7 +1,7 @@
-﻿using CaloriesTracker.Domain.InternalAuth.RegistrationSteps;
+﻿using CaloriesTracker.Domain.User.RegistrationSteps;
 using MediatR;
 
-namespace CaloriesTracker.Application.InternalAuth.RegistrationSteps.Credentials
+namespace CaloriesTracker.Application.User.RegistrationSteps.Credentials
 {
     public class GetRegistrationInfoQuery : IRequest<RegistrationInfo>
     {

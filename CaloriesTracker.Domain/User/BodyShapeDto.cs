@@ -1,4 +1,4 @@
-﻿namespace CaloriesTracker.Domain.InternalAuth
+﻿namespace CaloriesTracker.Domain.User
 {
     public class BodyShape
     {
